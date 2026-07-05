@@ -18,7 +18,7 @@ const CONFIG = {
 const MacBookPage: React.FC = () => {
   const [loaderHidden, setLoaderHidden] = useState(false);
 
-  const { canvasRef, isLoaded, loadProgress, drawFrame } = useFrameSequence({
+  const { canvasRef, isLoaded, drawFrame } = useFrameSequence({
     totalFrames: CONFIG.TOTAL_FRAMES,
     framePath: CONFIG.FRAME_PATH,
     frameExt: CONFIG.FRAME_EXT,

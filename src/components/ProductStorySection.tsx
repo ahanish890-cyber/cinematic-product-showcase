@@ -106,7 +106,7 @@ const ProductStorySection: React.FC = () => {
 
       // ── Feature Beats: Alternating Left/Right ────────────────
 
-      features.forEach((feature, index) => {
+      features.forEach((_, index) => {
         const beatId = `#product-beat-${index}`;
         const startPercent = 5 + index * 22;
         const endPercent = startPercent + 20;

@@ -10,18 +10,10 @@ interface GlowHeroProps {
 }
 
 const GlowHero: React.FC<GlowHeroProps> = ({ 
-  label, 
   glowText, 
-  labelSize = 'md',
-  glowTextSize = 'lg',
   className = '',
   id
 }) => {
-  const labelSizeClasses = {
-    sm: 'text-2xl',
-    md: 'text-3xl md:text-4xl',
-    lg: 'text-4xl md:text-5xl'
-  };
 
   return (
     <>
