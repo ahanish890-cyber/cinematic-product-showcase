@@ -6,9 +6,11 @@ import './ProductStorySection.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
+const BASE = import.meta.env.BASE_URL;
+
 const CONFIG = {
   TOTAL_FRAMES: 192,
-  FRAME_PATH: '/product-frames/frame-',
+  FRAME_PATH: `${BASE}product-frames/frame-`,
   FRAME_EXT: '.png',
   BG_COLOR: '#050505',
 };

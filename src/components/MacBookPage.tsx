@@ -8,9 +8,11 @@ import BentoGrid from '@/components/BentoGrid';
 import PremiumFeatureGrid from '@/components/PremiumFeatureGrid';
 import MacBookShowcase from '@/components/MacBookShowcase';
 
+const BASE = import.meta.env.BASE_URL;
+
 const CONFIG = {
   TOTAL_FRAMES: 52,
-  FRAME_PATH: '/frames/frame-',
+  FRAME_PATH: `${BASE}frames/frame-`,
   FRAME_EXT: '.png',
   BG_COLOR: '#050505',
 };
@@ -51,7 +53,7 @@ const MacBookPage: React.FC = () => {
           ════════════════════════════════════════════════════════════════ */}
       <nav id="navbar" aria-label="Main navigation">
         <div className="nav-logo">
-          <img src="/apple-logo.png" alt="Apple" className="apple-logo" />
+          <img src={`${BASE}apple-logo.png`} alt="Apple" className="apple-logo" />
         </div>
         <ul className="nav-links">
           <li><a href="#hero-sequence" id="nav-overview">Home</a></li>

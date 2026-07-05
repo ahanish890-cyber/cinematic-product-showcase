@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from 'react';
 import './ProductHero.css';
 
+const BASE = import.meta.env.BASE_URL;
+
 export default function ProductHero() {
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -29,7 +31,7 @@ export default function ProductHero() {
               <mask id="m4-video-mask">
                 {/* Apple Logo - sized to match M4 text height */}
                 <image
-                  xlinkHref="/apple-logo.png"
+                  xlinkHref={`${BASE}apple-logo.png`}
                   x="100"
                   y="-130"
                   width="700"
@@ -74,7 +76,7 @@ export default function ProductHero() {
                 loop
                 playsInline
                 className="product-hero-video-container"
-                src="/M4-text.mp4"
+                src={`${BASE}M4-text.mp4`}
               />
             </foreignObject>
           </svg>

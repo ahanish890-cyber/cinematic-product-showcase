@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
+const BASE = import.meta.env.BASE_URL;
+
 export default function MacBookShowcase() {
   const [selectedColor, setSelectedColor] = useState<'grey' | 'light'>('grey');
   const [selectedSize, setSelectedSize] = useState<'14' | '16'>('16');
 
-  const imageSrc = `/mac-${selectedColor}-${selectedSize}.png`;
+  const imageSrc = `${BASE}mac-${selectedColor}-${selectedSize}.png`;
   const colorLabel = selectedColor === 'grey' ? 'Silver' : 'Space Black';
   const sizeLabel = selectedSize === '14' ? '14"' : '16"';
 
