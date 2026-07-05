@@ -1,0 +1,506 @@
+/* Premium Feature Grid Section */
+.premium-feature-section {
+  background-color: #000000;
+  padding: 100px 40px;
+  font-family: 'SF Pro Display', 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.premium-feature-container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* Grid Layout */
+.premium-feature-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 28px;
+}
+
+/* Grid Positioning */
+.card-large:nth-child(1) {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.card-medium {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.card-small {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.card-large:nth-child(4) {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+/* Base Card Styles */
+.feature-card {
+  background: #1C1C1E;
+  border-radius: 28px;
+  overflow: hidden;
+  position: relative;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+}
+
+.feature-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+  transform: translateY(-4px);
+}
+
+/* Card Sizing */
+.card-large {
+  height: 500px;
+}
+
+.card-medium {
+  height: 250px;
+  align-self: stretch;
+}
+
+.card-small {
+  height: 320px;
+}
+
+/* Ensure proper height for large cards */
+.premium-feature-grid .card-large:nth-child(1),
+.premium-feature-grid .card-large:nth-child(4) {
+  height: 500px;
+}
+
+.premium-feature-grid .card-large:nth-child(4) {
+  height: 430px;
+}
+
+/* Card 1: Large with Image */
+.card-large {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.card-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 65%;
+  background-size: cover;
+  background-position: center;
+  z-index: 1;
+}
+
+.card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.2) 30%, rgba(0, 0, 0, 0.8) 100%);
+  z-index: 2;
+}
+
+.card-content {
+  position: relative;
+  z-index: 3;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.card-icon {
+  color: #FFFFFF;
+  width: 32px;
+  height: 32px;
+  margin-bottom: 8px;
+}
+
+.card-title {
+  font-size: 56px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: #FFFFFF;
+  margin: 0;
+  padding: 0;
+}
+
+/* Card 2: Medium with Icon */
+.card-medium {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.card-content-horizontal {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 32px;
+  width: 100%;
+}
+
+.card-icon-sun {
+  color: #FF9F0A;
+  flex-shrink: 0;
+}
+
+.card-title-medium {
+  font-size: 38px;
+  font-weight: 700;
+  line-height: 1.1;
+  color: #FFFFFF;
+  margin: 0;
+  padding: 0;
+  letter-spacing: -0.03em;
+}
+
+/* Card 3: Small with Gradient Border */
+.card-small {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #1C1C1E;
+  position: relative;
+  border-radius: 28px;
+  border: 3px solid transparent;
+  background-image: 
+    linear-gradient(#1C1C1E, #1C1C1E),
+    linear-gradient(
+      135deg,
+      #0A84FF 0%,
+      #5E5CE6 25%,
+      #BF5AF2 50%,
+      #FF375F 75%,
+      #FF9F0A 100%
+    );
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  animation: gradientFlow 6s linear infinite;
+}
+
+@keyframes gradientFlow {
+  0% {
+    background-image: 
+      linear-gradient(#1C1C1E, #1C1C1E),
+      linear-gradient(
+        135deg,
+        #0A84FF 0%,
+        #5E5CE6 25%,
+        #BF5AF2 50%,
+        #FF375F 75%,
+        #FF9F0A 100%
+      );
+  }
+  100% {
+    background-image: 
+      linear-gradient(#1C1C1E, #1C1C1E),
+      linear-gradient(
+        135deg,
+        #FF9F0A 0%,
+        #0A84FF 25%,
+        #5E5CE6 50%,
+        #BF5AF2 75%,
+        #FF375F 100%
+      );
+  }
+}
+
+.card-content-ai {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  text-align: center;
+  width: 100%;
+}
+
+.card-icon-ai {
+  background: linear-gradient(135deg, #0A84FF, #5E5CE6, #BF5AF2, #FF375F, #FF9F0A);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 8px rgba(10, 132, 255, 0.3));
+}
+
+.ai-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ai-label {
+  font-size: 18px;
+  font-weight: 500;
+  color: #FFFFFF;
+  margin: 0;
+  padding: 0;
+}
+
+.ai-highlight {
+  font-size: 24px;
+  font-weight: 700;
+  background: linear-gradient(90deg, #0A84FF, #5E5CE6, #BF5AF2, #FF375F, #FF9F0A);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0;
+  padding: 0;
+}
+
+/* Card 4: Large Battery */
+.card-content-battery {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 24px;
+  height: 100%;
+}
+
+.card-icon-battery {
+  color: #30D158;
+  width: 56px;
+  height: 56px;
+  margin-bottom: 12px;
+  margin-top: 0;
+}
+
+.battery-text {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.card-title-battery {
+  font-size: 56px;
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  color: #FFFFFF;
+  margin: 0;
+  padding: 0;
+}
+
+.battery-highlight {
+  color: #30D158;
+  font-weight: 700;
+}
+
+.battery-support {
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.2;
+  color: #8E8E93;
+  margin: 0;
+  padding: 0;
+  letter-spacing: -0.02em;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .premium-feature-container {
+    padding: 0 30px;
+  }
+
+  .premium-feature-grid {
+    gap: 24px;
+  }
+
+  .card-large:nth-child(1),
+  .card-large:nth-child(4) {
+    height: 420px;
+  }
+
+  .card-large:nth-child(4) {
+    height: 360px;
+  }
+
+  .card-medium {
+    height: 220px;
+  }
+
+  .card-small {
+    height: 280px;
+  }
+
+  .card-title {
+    font-size: 48px;
+  }
+
+  .card-title-medium {
+    font-size: 32px;
+  }
+
+  .card-title-battery {
+    font-size: 48px;
+  }
+
+  .ai-highlight {
+    font-size: 20px;
+  }
+
+  .battery-support {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .premium-feature-section {
+    padding: 60px 0;
+  }
+
+  .premium-feature-container {
+    padding: 0 20px;
+  }
+
+  .premium-feature-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .card-large:nth-child(1),
+  .card-large:nth-child(4),
+  .card-medium,
+  .card-small {
+    grid-column: 1;
+  }
+
+  .card-large:nth-child(1) {
+    grid-row: 1;
+  }
+
+  .card-medium {
+    grid-row: 2;
+  }
+
+  .card-small {
+    grid-row: 3;
+  }
+
+  .card-large:nth-child(4) {
+    grid-row: 4;
+  }
+
+  .card-large:nth-child(1),
+  .card-large:nth-child(4) {
+    height: 350px;
+  }
+
+  .card-large:nth-child(4) {
+    height: 280px;
+  }
+
+  .card-medium {
+    height: 180px;
+  }
+
+  .card-small {
+    height: 220px;
+  }
+
+  .card-title {
+    font-size: 36px;
+  }
+
+  .card-title-medium {
+    font-size: 24px;
+  }
+
+  .card-title-battery {
+    font-size: 36px;
+  }
+
+  .card-content-horizontal {
+    gap: 16px;
+    padding: 24px;
+  }
+
+  .card-icon-sun,
+  .card-icon-battery {
+    width: 44px;
+    height: 44px;
+  }
+
+  .ai-highlight {
+    font-size: 18px;
+  }
+
+  .battery-support {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .premium-feature-section {
+    padding: 40px 0;
+  }
+
+  .premium-feature-container {
+    padding: 0 16px;
+  }
+
+  .feature-card {
+    border-radius: 20px;
+  }
+
+  .card-large:nth-child(1),
+  .card-large:nth-child(4) {
+    height: 280px;
+  }
+
+  .card-large:nth-child(4) {
+    height: 220px;
+  }
+
+  .card-medium {
+    height: 140px;
+  }
+
+  .card-small {
+    height: 160px;
+  }
+
+  .card-content {
+    padding: 24px;
+  }
+
+  .card-title {
+    font-size: 24px;
+  }
+
+  .card-title-medium {
+    font-size: 18px;
+  }
+
+  .card-title-battery {
+    font-size: 24px;
+  }
+
+  .card-content-horizontal {
+    padding: 20px;
+    gap: 12px;
+  }
+
+  .ai-label {
+    font-size: 14px;
+  }
+
+  .ai-highlight {
+    font-size: 16px;
+  }
+
+  .battery-support {
+    font-size: 12px;
+  }
+}

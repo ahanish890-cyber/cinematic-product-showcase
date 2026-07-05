@@ -1,0 +1,644 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ========================================================================
+   DESIGN SYSTEM — CSS Custom Properties (Apple Aesthetic)
+   ======================================================================== */
+:root {
+  /* Backgrounds */
+  --bg-primary: #050505;
+  --bg-secondary: #0A0A0A;
+  --bg-nav: rgba(5, 5, 5, 0.72);
+  --bg-card: rgba(255, 255, 255, 0.04);
+  --bg-card-hover: rgba(255, 255, 255, 0.07);
+
+  /* Text Colors */
+  --text-heading: rgba(255, 255, 255, 0.94);
+  --text-body: rgba(255, 255, 255, 0.56);
+  --text-muted: rgba(255, 255, 255, 0.32);
+  --text-white: #ffffff;
+
+  /* Accent Colors — Apple-inspired warm tones */
+  --accent-blue: #2997FF;
+  --accent-cyan: #64D2FF;
+  --accent-purple: #BF5AF2;
+  --accent-glow: rgba(41, 151, 255, 0.12);
+
+  /* Typography */
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', system-ui, sans-serif;
+
+  /* Spacing */
+  --nav-height: 70px;
+
+  /* Transitions */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* ========================================================================
+   RESET & BASE
+   ======================================================================== */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: auto; /* Lenis handles smooth scroll */
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-primary);
+  color: var(--text-body);
+  line-height: 1.6;
+  overflow-x: hidden;
+  display: block;
+  min-height: 100vh;
+}
+
+#root {
+  width: 100%;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+/* ========================================================================
+   LOADING SCREEN
+   ======================================================================== */
+#loader {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: var(--bg-primary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.9s var(--ease-out-expo), visibility 0.9s;
+}
+#loader.loaded {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+#loader .loader-brand {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 48px;
+}
+#loader .loader-title {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--text-heading);
+  margin-bottom: 40px;
+}
+#loader .loader-bar-track {
+  width: min(280px, 60vw);
+  height: 2px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 1px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+#loader .loader-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan));
+  border-radius: 1px;
+  transition: width 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 0 16px rgba(100, 210, 255, 0.4);
+}
+#loader .loader-percent {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ========================================================================
+   NAVBAR (Apple.com inspired)
+   ======================================================================== */
+#navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--nav-height);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 clamp(20px, 4vw, 48px);
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-bottom: 1px solid transparent;
+  transition: background 0.5s var(--ease-out-expo),
+              backdrop-filter 0.5s var(--ease-out-expo),
+              border-color 0.5s var(--ease-out-expo);
+}
+#navbar.scrolled {
+  background: var(--bg-nav);
+  backdrop-filter: blur(20px) saturate(200%);
+  -webkit-backdrop-filter: blur(20px) saturate(200%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--text-heading);
+  white-space: nowrap;
+}
+.nav-logo .apple-logo {
+  width: 32px;
+  height: 32px;
+  color: var(--text-heading);
+}
+.nav-logo span {
+  color: var(--text-body);
+  font-weight: 400;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  list-style: none;
+}
+.nav-links a {
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: var(--text-body);
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  transition: color 0.3s ease;
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--accent-blue);
+  transition: width 0.3s var(--ease-out-expo);
+}
+.nav-links a:hover {
+  color: var(--text-heading);
+}
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+.nav-cta {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-white);
+  text-decoration: none;
+  padding: 8px 18px;
+  border-radius: 980px;
+  background: var(--accent-blue);
+  transition: background 0.3s ease, transform 0.3s var(--ease-out-expo);
+  white-space: nowrap;
+}
+.nav-cta:hover {
+  background: #1a8aff;
+  transform: translateY(-1px);
+}
+
+/* Mobile hamburger */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+}
+.nav-hamburger span {
+  width: 18px;
+  height: 1.5px;
+  background: var(--text-heading);
+  border-radius: 1px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* ========================================================================
+   HERO SEQUENCE SECTION
+   ======================================================================== */
+#hero-sequence {
+  position: relative;
+  width: 100%;
+  height: 500vh;
+}
+
+.canvas-container {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--bg-primary);
+}
+
+#frame-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 0;
+}
+
+/* Subtle ambient glow behind product */
+.canvas-container::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 65%;
+  height: 65%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(41, 151, 255, 0.06) 0%,
+    rgba(100, 210, 255, 0.03) 30%,
+    transparent 75%
+  );
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(60px);
+}
+
+/* ========================================================================
+   STORY BEAT OVERLAYS
+   ======================================================================== */
+.story-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+
+  padding-inline: clamp(20px, 5vw, 80px);
+  padding-top: calc(var(--nav-height) + 20px);
+}
+#beat-hero .beat-content {
+  width: min(1500px, 95vw);
+
+  margin-inline: auto;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+
+  transform: translateY(-40px);
+
+  z-index: 20;
+}
+
+/* Scroll indicator */
+.scroll-indicator {
+  position: absolute;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+}
+.scroll-indicator span {
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.scroll-indicator .scroll-line {
+  width: 1px;
+  height: 28px;
+  background: linear-gradient(to bottom, var(--accent-blue), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.3; transform: scaleY(0.6); }
+  50% { opacity: 1; transform: scaleY(1); }
+}
+
+/* Beat 2: Engineering — Left aligned */
+#beat-engineering .beat-content {
+  text-align: left;
+  max-width: 460px;
+  position: relative;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Beat 3: Performance — Right aligned */
+#beat-performance .beat-content {
+  text-align: left;
+  max-width: 460px;
+  position: relative;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Beat 4: Display — Left aligned */
+#beat-display .beat-content {
+  text-align: left;
+  max-width: 460px;
+  position: relative;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Tech badge */
+.tech-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 18px;
+  border-radius: 12px;
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  margin-top: 14px;
+}
+.tech-badge .icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  font-weight: 800;
+  color: white;
+  letter-spacing: -0.02em;
+}
+.tech-badge .label {
+  font-size: 0.73rem;
+  font-weight: 500;
+  color: var(--text-body);
+}
+.tech-badge .label strong {
+  color: var(--text-heading);
+  font-weight: 600;
+  display: block;
+  font-size: 0.8rem;
+}
+
+/* Beat 5: CTA — Center */
+#beat-cta .beat-content {
+  text-align: center;
+  max-width: 620px;
+}
+#beat-cta h2 {
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  background: linear-gradient(
+    180deg,
+    var(--text-heading) 25%,
+    rgba(100, 210, 255, 0.55) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 16px;
+}
+#beat-cta .cta-sub {
+  font-size: clamp(0.88rem, 1.15vw, 1.02rem);
+  color: var(--text-body);
+  margin-bottom: 36px;
+  font-weight: 400;
+}
+.cta-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  border-radius: 980px;
+  background: var(--accent-blue);
+  color: var(--text-white);
+  font-family: var(--font-family);
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s var(--ease-out-expo);
+  pointer-events: auto;
+}
+.btn-primary:hover {
+  background: #1a8aff;
+  transform: translateY(-1px);
+}
+.btn-primary svg {
+  width: 14px;
+  height: 14px;
+}
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 22px;
+  border-radius: 980px;
+  background: transparent;
+  color: var(--accent-blue);
+  font-family: var(--font-family);
+  font-size: 0.83rem;
+  font-weight: 500;
+  text-decoration: none;
+  border: 1px solid rgba(41, 151, 255, 0.25);
+  cursor: pointer;
+  transition: border-color 0.3s ease, background 0.3s ease;
+  pointer-events: auto;
+}
+.btn-secondary:hover {
+  border-color: rgba(41, 151, 255, 0.5);
+  background: rgba(41, 151, 255, 0.06);
+}
+.cta-micro {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-top: 20px;
+  font-weight: 400;
+}
+
+
+
+/* ========================================================================
+   FOOTER
+   ======================================================================== */
+footer {
+  padding: 36px clamp(20px, 5vw, 80px);
+  background: var(--bg-primary);
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+footer .footer-left {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+footer .footer-links {
+  display: flex;
+  gap: 24px;
+  list-style: none;
+}
+footer .footer-links a {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+footer .footer-links a:hover {
+  color: var(--text-body);
+}
+
+/* ========================================================================
+   RESPONSIVE
+   ======================================================================== */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+  .nav-cta {
+    display: none;
+  }
+  .nav-hamburger {
+    display: flex;
+  }
+
+  #beat-engineering .beat-content,
+  #beat-performance .beat-content,
+  #beat-display .beat-content {
+    position: relative;
+    left: auto;
+    right: auto;
+    top: auto;
+    transform: translateY(30px);
+    max-width: 100%;
+    padding: 0 8px;
+  }
+
+  .story-overlay {
+    padding: 24px;
+    padding-top: calc(var(--nav-height) + 16px);
+    align-items: flex-end;
+    padding-bottom: clamp(60px, 12vh, 120px);
+  }
+
+  #beat-hero .story-overlay,
+  #beat-cta .story-overlay {
+    align-items: center;
+    padding-bottom: 24px;
+  }
+
+  /* Override story-overlay specifics for hero and cta beats */
+  #beat-hero,
+  #beat-cta {
+    align-items: center;
+    padding-bottom: 24px;
+  }
+
+  .specs-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  #beat-hero h1 {
+    font-size: 2.4rem;
+  }
+  #beat-cta h2 {
+    font-size: 2rem;
+  }
+  .cta-group {
+    flex-direction: column;
+  }
+}
+
+/* ========================================================================
+   UTILITY
+   ======================================================================== */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+/* ========================================================================
+   LENIS STYLES
+   ======================================================================== */
+html.lenis, html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
